@@ -1,0 +1,51 @@
+@media (max-width: 1024px) {
+  .main-container, .projects-section {
+    max-width: 98vw;
+  }
+  .profile-card, .content-card {
+    min-width: 220px;
+    max-width: 100vw;
+  }
+}
+@media (max-width: 768px) {
+  .main-container {
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+  .card {
+    width: 100%;
+    max-width: 400px;
+    padding: 20px;
+  }
+  .profile-card, .content-card {
+    width: auto;
+    min-width: 0;
+    max-width: 100vw;
+  }
+  .buttons {
+    grid-template-columns: 1fr;
+  }
+  .secret-btn {
+    grid-column: span 1;
+  }
+  .terminal {
+    height: 250px;
+  }
+}
+@media (max-width: 480px) {
+  .profile-telegram-btn, .profile-github-btn {
+    width: 140px;
+  }
+  .theme-toggle {
+    font-size: 12px;
+    padding: 8px 16px;
+  }
+  .visitor-counter {
+    font-size: 10px;
+    padding: 6px 10px;
+  }
+  .terminal {
+    height: 200px;
+  }
+} 
