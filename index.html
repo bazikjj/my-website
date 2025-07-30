@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ba31k's website</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@700&family=Source+Code+Pro:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/main.css" />
+  <link rel="stylesheet" href="css/responsive.css" />
+</head>
+<body class="dark">
+  <button class="theme-toggle" onclick="toggleTheme()">Night mode 🌙</button>
+  <div class="visitor-counter" id="visitorCounter">Visitors: Loading...</div>
+  <canvas id="particles"></canvas>
+  <div class="main-container">
+    <div class="card profile-card">
+      <div class="profile-content">
+        <img src="https://t.me/i/userpic/320/bazik1337.jpg" alt="Telegram Avatar" class="avatar">
+        <div class="profile-info">
+          <div class="username">ba31k <img src="https://upload.wikimedia.org/wikipedia/commons/e/e4/Twitter_Verified_Badge.svg" alt="checkmark" class="checkmark"></div>
+          <div class="handle">@bazik1337</div>
+          <div class="status">online</div>
+        </div>
+        <div class="skills">
+          <div class="skills-title">Skills & Interests</div>
+          <div class="skills-list">
+            <div class="skill-tag">Linux</div>
+            <div class="skill-tag">C++</div>
+            <div class="skill-tag">DevOps</div>
+          </div>
+          <div class="skills-list" style="margin-top: 8px;">
+            <div class="skill-tag">Python</div>
+            <div class="skill-tag">Android</div>
+            <div class="skill-tag">Bash</div>
+          </div>
+        </div>
+      </div>
+      <a href="https://t.me/bazik1337" target="_blank" rel="noopener" class="profile-telegram-btn">
+        <svg class="telegram-icon" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M9.78 18.65l.28-4.23 7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.3 3.64 12c-.88-.25-.89-.86.2-1.3l15.97-6.16c.73-.33 1.43.18 1.15 1.3l-2.72 12.81c-.19.91-.74 1.13-1.5.71L12.6 16.3l-1.99 1.93c-.23.23-.42.42-.83.42z"/>
+        </svg>
+        Telegram
+      </a>
+      <a href="https://github.com/bazikjj" target="_blank" rel="noopener" class="profile-github-btn">
+        <svg class="github-icon" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z"/>
+        </svg>
+        GitHub
+      </a>
+    </div>
+    <div class="card content-card">
+      <h2>System Terminal</h2>
+      <div class="terminal" id="animatedTerminal"></div>
+
+      <div class="buttons">
+        <a href="#" onclick="rickroll()" class="secret-btn">Initiate Protocol ✨</a>
+      </div>
+    </div>
+  </div>
+  <div class="projects-section">
+    <h2 class="projects-title">My Projects</h2>
+    <div class="project-cards">
+      <div class="project-card">
+        <h3>Mi 11 Ports</h3>
+        <p>Custom ROM ports for Xiaomi Mi 11 with enhanced features and performance optimizations.</p>
+        <a href="https://t.me/mi11rom" target="_blank" class="project-link">View Project</a>
+      </div>
+      <div class="project-card">
+        <h3>Celvo Control Center</h3>
+        <p>Linux system control panel with advanced customization options for power users.</p>
+        <a href="https://github.com/bazikjj/ardorcontrolcenter" target="_blank" class="project-link">View on GitHub</a>
+      </div>
+      <div class="project-card">
+        <h3>Celvo disk Driver</h3>
+        <p>Universal disk driver with support for various filesystems and advanced features.</p>
+        <a href="https://github.com/bazikjj/ardordriver" target="_blank" class="project-link">View on GitHub</a>
+      </div>
+    </div>
+  </div>
+  <script>
+    // Particles
+    const canvas = document.getElementById('particles');
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+    for (let i = 0; i < 180; i++) {
+      particles.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        r: Math.random() * 2 + 1,
+        d: Math.random() * 2 + 1
+      });
+    }
+    function draw() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      const isDark = document.body.classList.contains('dark');
+      ctx.fillStyle = isDark ? "rgba(255, 255, 255, 0.7)" : "rgba(30, 64, 175, 0.2)";
+      ctx.beginPath();
+      for (let i = 0; i < particles.length; i++) {
+        const p = particles[i];
+        ctx.moveTo(p.x, p.y);
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2, true);
+      }
+      ctx.fill();
+      update();
+    }
+    function update() {
+      for (let i = 0; i < particles.length; i++) {
+        const p = particles[i];
+        p.y += p.d;
+        if (p.y > canvas.height) {
+          p.y = 0;
+          p.x = Math.random() * canvas.width;
+        }
+      }
+    }
+    setInterval(draw, 33);
+    // Theme toggle
+    function toggleTheme() {
+      const body = document.body;
+      const btn = document.querySelector('.theme-toggle');
+      if (body.classList.contains('dark')) {
+        body.classList.replace('dark', 'light');
+        btn.textContent = 'Light mode ☀️';
+      } else {
+        body.classList.replace('light', 'dark');
+        btn.textContent = 'Night mode 🌙';
+      }
+      draw();
+    }
+    // Visitor counter simulation
+    function updateVisitorCounter() {
+      const counterElement = document.getElementById('visitorCounter');
+      // In a real implementation, you would fetch this from a server
+      const baseVisitors = 1248;
+      const randomFactor = Math.floor(Math.random() * 50);
+      const totalVisitors = baseVisitors + randomFactor;
+      counterElement.textContent = `Visitors: ${totalVisitors.toLocaleString()}`;
+    }
+    // Rickroll function
+    function rickroll() {
+      const btn = document.querySelector('.secret-btn');
+      btn.innerHTML = 'Initializing... <span class="spinner">🌀</span>';
+      btn.style.pointerEvents = 'none';
+      setTimeout(() => {
+        window.location.href = "https://www.youtube.com/watch?v=dQw4w9WgXcQ";
+      }, 1500);
+      return false;
+    }
+    // Terminal animation with hacker effect and auto-scroll
+    function animateTerminal() {
+      const terminal = document.getElementById('animatedTerminal');
+      const lines = [
+        { type: 'prompt', text: 'root@ba31k:~# ', command: 'sudo nmap -sS 192.168.1.0/24' },
+        { type: 'output', text: 'Starting Nmap 7.80 ( https://nmap.org )' },
+        { type: 'output', text: 'Nmap scan report for 192.168.1.1' },
+        { type: 'output', text: 'Host is up (0.0023s latency).' },
+        { type: 'output', text: 'Not shown: 998 closed ports' },
+        { type: 'output', text: 'PORT    STATE SERVICE' },
+        { type: 'output', text: '22/tcp  open  ssh' },
+        { type: 'output', text: '80/tcp  open  http' },
+        { type: 'prompt', text: 'root@ba31k:~# ', command: 'hydra -l admin -P passlist.txt ssh://192.168.1.1' },
+        { type: 'output', text: '[DATA] attacking ssh://192.168.1.1:22/' },
+        { type: 'output', text: '[22][ssh] host: 192.168.1.1   login: admin   password: admin123' },
+        { type: 'prompt', text: 'root@ba31k:~# ', command: 'ssh admin@192.168.1.1' },
+        { type: 'output', text: 'Welcome to Advanced Router OS' },
+        { type: 'output', text: 'admin@router:~$ ' },
+        { type: 'prompt', text: 'admin@router:~$ ', command: 'cat /etc/passwd' },
+        { type: 'output', text: 'root:x:0:0:root:/root:/bin/bash' },
+        { type: 'output', text: 'daemon:x:1:1:daemon:/usr/sbin:/usr/sbin/nologin' },
+        { type: 'output', text: 'admin:x:1000:1000:Admin User,,,:/home/admin:/bin/bash' },
+        { type: 'prompt', text: 'admin@router:~$ ', command: 'exit' },
+        { type: 'output', text: 'Connection to 192.168.1.1 closed.' },
+        { type: 'prompt', text: 'root@ba31k:~# ', command: 'clear' },
+        { type: 'prompt', text: 'root@ba31k:~# ', command: 'whoami' },
+        { type: 'output', text: 'root' },
+        { type: 'prompt', text: 'root@ba31k:~# ', command: 'uname -a' },
+        { type: 'output', text: 'Linux ba31k 5.15.0-76-generic #83-Ubuntu SMP Thu Jun 15 19:16:32 UTC 2023 x86_64 x86_64 x86_64 GNU/Linux' },
+        { type: 'prompt', text: 'root@ba31k:~# ', command: 'ifconfig' },
+        { type: 'output', text: 'eth0: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500' },
+        { type: 'output', text: '        inet 192.168.1.100  netmask 255.255.255.0  broadcast 192.168.1.255' },
+        { type: 'output', text: '        inet6 fe80::20c:29ff:fe12:3456  prefixlen 64  scopeid 0x20<link>' },
+        { type: 'prompt', text: 'root@ba31k:~# ', command: 'ping google.com' },
+        { type: 'output', text: 'PING google.com (142.250.185.46) 56(84) bytes of data.' },
+        { type: 'output', text: '64 bytes from fra16s48-in-f14.1e100.net (142.250.185.46): icmp_seq=1 ttl=117 time=12.3 ms' },
+        { type: 'output', text: '64 bytes from fra16s48-in-f14.1e100.net (142.250.185.46): icmp_seq=2 ttl=117 time=11.8 ms' }
+      ];
+      let currentLine = 0;
+      terminal.innerHTML = '';
+
+      function typeLine(line, cb) {
+        let i = 0;
+        let html = '';
+        let cursor = '<span class="terminal-cursor">█</span>';
+        if (line.type === 'prompt') {
+          html = `<span class="terminal-prompt">${line.text}</span><span class="terminal-command"></span>${cursor}`;
+        } else {
+          html = `<span class="terminal-output"></span>${cursor}`;
+        }
+        const div = document.createElement('div');
+        div.className = 'terminal-line';
+        div.innerHTML = html;
+        terminal.appendChild(div);
+
+        // Auto-scroll to bottom
+        terminal.scrollTop = terminal.scrollHeight;
+
+        function typeChar() {
+          if (line.type === 'prompt') {
+            const cmdSpan = div.querySelector('.terminal-command');
+            if (i < line.command.length) {
+              cmdSpan.textContent += line.command[i];
+              i++;
+              setTimeout(typeChar, Math.random() * 50 + 30);
+            } else {
+              div.querySelector('.terminal-cursor').remove();
+              cb();
+            }
+          } else {
+            const outSpan = div.querySelector('.terminal-output');
+            if (i < line.text.length) {
+              outSpan.textContent += line.text[i];
+              i++;
+              setTimeout(typeChar, Math.random() * 30 + 10);
+            } else {
+              div.querySelector('.terminal-cursor').remove();
+              cb();
+            }
+          }
+          // Continue auto-scrolling during typing
+          terminal.scrollTop = terminal.scrollHeight;
+        }
+        typeChar();
+      }
+
+      function nextLine() {
+        if (currentLine < lines.length) {
+          typeLine(lines[currentLine], () => {
+            currentLine++;
+            setTimeout(nextLine, 500);
+          });
+        } else {
+          // Scroll to top and restart
+          setTimeout(() => {
+            terminal.scrollTo({ top: 0, behavior: 'smooth' });
+            setTimeout(() => {
+              terminal.innerHTML = '';
+              currentLine = 0;
+              setTimeout(nextLine, 1000);
+            }, 1000);
+          }, 2000);
+        }
+      }
+
+      nextLine();
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const body = document.body;
+      const btn = document.querySelector('.theme-toggle');
+      btn.textContent = body.classList.contains('dark') ? 'Night mode 🌙' : 'Light mode ☀️';
+      draw();
+      updateVisitorCounter();
+      animateTerminal();
+      // Add animation to skills on hover
+      const skills = document.querySelectorAll('.skill-tag');
+      skills.forEach(skill => {
+        skill.addEventListener('mouseover', () => {
+          skill.style.transform = 'scale(1.1)';
+        });
+        skill.addEventListener('mouseout', () => {
+          skill.style.transform = 'scale(1)';
+        });
+      });
+    });
+  </script>
+</body>
+</html>
